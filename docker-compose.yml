@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: pgdata-blogging-platform-api
+    ports:
+      - "${DB_PORT:-5433}:5432"
+    environment:
+      - POSTGRES_DB=${DB_NAME:-blogging-platform}
+      - POSTGRES_USER=${DB_USER:-bp}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-bp}
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $${DB_USER} -d $${DB_NAME}" ]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    volumes:
+      - "pgdata-blogging-platform:/var/lib/postgresql/data"
+volumes:
+  pgdata-blogging-platform:
