@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: blogging-platform-api
+  datasource:
+    url: >-
+      jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT}/${DB_NAME:blogging-platform}
+    username: '${DB_USER:bp}'
+    password: '${DB_PASSWORD:bp}'
+  jpa:
+    properties:
+      hibernate:
+        dialect: '${HIBERNATE_DIALECT:org.hibernate.dialect.PostgreSQLDialect}'
+    hibernate:
+      ddl-auto: update
+server:
+  port: '${PORT:9090}'
