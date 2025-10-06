@@ -5,7 +5,7 @@ CREATE TABLE posts (
     author      VARCHAR(100),
     category_id BIGINT REFERENCES categories(id) ON DELETE SET NULL,
     created_at  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    updated_at  TIMESTAMP
 );
 
 -- Indexes
