@@ -12,5 +12,9 @@ spring:
         dialect: '${HIBERNATE_DIALECT:org.hibernate.dialect.PostgreSQLDialect}'
     hibernate:
       ddl-auto: validate
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+    property-naming-strategy: SNAKE_CASE
 server:
   port: '${PORT:9090}'
