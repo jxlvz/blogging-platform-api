@@ -15,5 +15,26 @@ services:
       retries: 10
     volumes:
       - "pgdata-blogging-platform:/var/lib/postgresql/data"
+
+  blogging-platform-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: blogging-platform-api
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "9090:9090"
+    environment:
+      DB_HOST: postgres
+      DB_PORT: "5432"
+      DB_NAME: ${DB_NAME:-blogging-platform}
+      DB_USER: ${DB_USER:-bp}
+      DB_PASSWORD: ${DB_PASSWORD:-bp}
+      HIBERNATE_DIALECT: "org.hibernate.dialect.PostgreSQLDialect"
+      PORT: "9090"             # server.port
+    restart: unless-stopped
+
 volumes:
   pgdata-blogging-platform:
